@@ -34,7 +34,7 @@ paths:
     get:
       tags:
       - "Module Twitter support"
-      summary: "Get replie to a tweet"
+      summary: "Get replies to a tweet"
       description: "Gets a list of all the replies to a certain tweet_id"
       parameters:
         - name: "tweet_id"
@@ -116,5 +116,7 @@ components:
         content:
           type: "string"
         replies:
-          type: "array"
-          items: "integer"
+          schema:
+            type: "array"
+            items: 
+              type: "integer"
