@@ -28,8 +28,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Tweet"
-        400:
-          description: "Invalid input"
+        404:
+          description: "Resoruce not found, it does not exist in our database"
   /tweet/{tweet_id}/replies:
     get:
       tags:
@@ -52,8 +52,8 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/Tweet"
-        400:
-          description: "Invalid input"
+        404:
+          description: "That resource does not exist in our database"
   /user/{user}/tweet:
     get:
       tags:
@@ -83,7 +83,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Tweet"
         404:
-          description: "no such user"
+          description: "That resource does not exist in our database"
   /tweet:
     post:
       tags: 
