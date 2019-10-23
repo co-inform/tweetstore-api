@@ -113,10 +113,13 @@ components:
           format: "int64"
         user:
           type: "string"
+          example: "realDonaldTrump"
         content:
           type: "string"
+          example: "I will build a great wall"
         replies:
           schema:
             type: "array"
             items: 
               type: "integer"
+            example: [1, 2, 3, 4]
