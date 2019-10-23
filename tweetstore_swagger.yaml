@@ -111,6 +111,7 @@ components:
         tweet_id:
           type: "integer" 
           format: "int64"
+          example: 5555555
         user:
           type: "string"
           example: "realDonaldTrump"
@@ -122,4 +123,4 @@ components:
             items:
               type: "integer"
               format: "int64"
-            exampel: [1, 2, 3, 4]
+            example: [1, 2, 3, 4]
