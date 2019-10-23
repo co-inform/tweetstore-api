@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 servers:
-  - url: https://api.coinform.eu/
+  - url: https://tweetstore.coinform.eu/
     description: The TweetStore server adress 
 info:
   description: |
