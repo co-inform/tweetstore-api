@@ -119,8 +119,9 @@ components:
           type: "string"
           example: "I will build a great wall"
         replies:
-            type: "array"
-            items:
-              type: "integer"
-              format: "int64"
-            example: [1, 2, 3, 4]
+          description: "An array of integers representing the replies to the particual Tweet"
+          type: "array"
+          items:
+            type: "integer"
+            format: "int64"
+          example: [1, 2, 3, 4]
