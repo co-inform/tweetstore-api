@@ -35,7 +35,7 @@ paths:
       tags:
       - "Module Twitter support"
       summary: "Get replies to a tweet"
-      description: "Gets a list of all the replies to a certain tweet_id"
+      description: "Gets a list of all the replies to a certain tweet_id that exists in our database, necesarily not all specified in the replies array of Tweet objects. Missing replies will have to be handled by the module"
       parameters:
         - name: "tweet_id"
           in: "path"
@@ -58,9 +58,8 @@ paths:
     get:
       tags:
       - "Module Twitter support"
-      summary: "Get a response from a query"
-      description: "Get the request from a previous query"
-      operationId: "requestQueryId"
+      summary: "Get user Tweets"
+      description: "Gets all or n tweets connected to a user in the database"
       parameters:
       - name: "user"
         in: "path"
@@ -119,7 +118,7 @@ components:
           type: "string"
           example: "I will build a great wall"
         replies:
-          description: "An array of integers representing the replies to the particual Tweet"
+          description: "An array of integers representing the replies to the particular Tweet"
           type: "array"
           items:
             type: "integer"
