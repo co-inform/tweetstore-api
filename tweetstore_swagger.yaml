@@ -1,0 +1,94 @@
+openapi: "3.0.0"
+servers:
+  - url: https://api.coinform.eu/
+    description: The TweetStore server adress 
+info:
+  description: |
+    This document describes the API exposed by Co-Inform's Misinformation Detection Modules TweetStore support server.
+    This server is a store for tweets accumulated by the modules so as to reduce the load of circumventing the Twitter API.
+  version: "0.0.1"
+  title: "[Draft] Co-Inform TweetStore API"
+paths:
+  /tweet/{tweet_id}:
+    get:
+      tags: 
+      - "Module Twitter support" 
+      summary: "Get a previously retreived Tweet"
+      responses:
+        200:
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tweet"
+        400:
+          description: "Invalid input"
+  /tweet/{tweet_id}/replies:
+    get:
+      tags:
+      - "Module Twitter support"
+      summary: "Get replie to a tweet"
+      description: "Gets a list of all the replies to a certain tweet_id"
+      responses:
+        200:
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tweet"
+        400:
+          description: "Invalid input"
+  /user/{user}/tweet:
+    get:
+      tags:
+      - "Module Twitter support"
+      summary: "Get a response from a query"
+      description: "Get the request from a previous query"
+      operationId: "requestQueryId"
+      parameters:
+      - name: "n"
+        in: "path"
+        description: "the number of tweets to request for a certain Twitter user, if n is omitted or equals -1 all the stored tweets will be returned"
+        required: false
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tweet"
+        404:
+          description: "no such query_id"
+  /tweet:
+    post:
+      tags: 
+      - "Module Twitter support"
+      summary: "Store a tweet in the TwitterStore"
+      description: "Stores a single tweet in the store"
+      requestBody:
+        description: "A tweet to be stored in the db"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Tweet"
+      responses:
+        200:
+          description: "successful operation"
+        404:
+          description: "no such transaction_id"
+components:
+  schemas:
+    Tweet:
+      type: "object"
+      properties:
+        tweet_id:
+          type: "integer" 
+        user:
+          type: "string"
+        content:
+          type: "string"
+        replies:
+          type: "array"
