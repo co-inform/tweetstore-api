@@ -122,6 +122,5 @@ components:
             $ref: "#/components/schemas/IntArray"
     IntArray:
       type: "array"
-      items:
-        type: "integer"
+      items: "integer"
       example: [1, 2, 3, 4]
