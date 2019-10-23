@@ -93,9 +93,12 @@ components:
       properties:
         tweet_id:
           type: "integer" 
+          format: "int64"
         user:
           type: "string"
         content:
           type: "string"
         replies:
           type: "array"
+          items: "integer"
+          format: "int64"
