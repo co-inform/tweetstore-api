@@ -119,7 +119,9 @@ components:
           example: "I will build a great wall"
         replies:
           schema:
-            type: "array"
-            items: 
-              type: "integer"
-            example: [1, 2, 3, 4]
+            $ref: "#/components/schemas/IntArray"
+    IntArray:
+      type: "array"
+      items:
+        type: "integer"
+      example: [1, 2, 3, 4]
