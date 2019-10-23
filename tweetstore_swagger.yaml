@@ -101,4 +101,3 @@ components:
         replies:
           type: "array"
           items: "integer"
-          format: "int64"
