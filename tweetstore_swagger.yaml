@@ -23,7 +23,7 @@ paths:
           type: "string"
       responses:
         200:
-          description: "successful operation"
+          description: "Will return a single Tweet"
           content:
             application/json:
               schema:
@@ -45,7 +45,7 @@ paths:
             type: "string"
       responses:
         200:
-          description: "successful operation"
+          description: "Will return an Array of Tweet objects that are replies to the queried tweet_id"
           content:
             application/json:
               schema:
@@ -70,13 +70,13 @@ paths:
           type: "string"
       - name: "n"
         in: "path"
-        description: "the number of tweets to request for a certain Twitter user, if n is omitted or equals -1 all the stored tweets will be returned"
+        description: "the number of tweets to request for a certain Twitter user, if n is omitted or equals -1 all the stored tweets will be returned. If n == 0 no tweets will be retrieved"
         required: false
         schema:
           type: "string"
       responses:
         200:
-          description: "successful operation"
+          description: "Will return an array of Tweet objects that are linked to the particular user"
           content:
             application/json:
               schema:
@@ -84,7 +84,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Tweet"
         404:
-          description: "no such query_id"
+          description: "no such user"
   /tweet:
     post:
       tags: 
@@ -100,9 +100,9 @@ paths:
               $ref: "#/components/schemas/Tweet"
       responses:
         200:
-          description: "successful operation"
+          description: "The tweet was successfully stored in the database"
         404:
-          description: "no such transaction_id"
+          description: "Invalid request or body"
 components:
   schemas:
     Tweet:
