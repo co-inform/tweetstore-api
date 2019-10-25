@@ -88,15 +88,17 @@ paths:
     post:
       tags: 
       - "Module Twitter support"
-      summary: "Store a tweet in the TwitterStore"
-      description: "Stores a single tweet in the store"
+      summary: "Store a tweet(s) in the TwitterStore"
+      description: "Takes an array of Tweet objects to be stored in the database"
       requestBody:
-        description: "A tweet to be stored in the db"
+        description: "An array of Tweet objects"
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Tweet"
+              type: "array"
+              items:
+                $ref: "#/components/schemas/Tweet"
       responses:
         200:
           description: "The tweet was successfully stored in the database"
