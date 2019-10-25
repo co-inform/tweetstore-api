@@ -128,17 +128,11 @@ components:
           description: "An array of objects holding a shortened and an expanded url"
           type: "array"
           items:
-            $ref: "#/component/schemas/Urls"
-          example:
-            - expandend_url: "https://www.youtube.com/watch?v=zlJDTxahav0"
-            - short_url: "https://youtu.be/zlJDTxahav0"
-    Urls:
-      type: "object"
-      properties:
-        expanded_url:
-          type: "string"
-          example: "https://www.youtube.com/watch?v=zlJDTxahav0"
-        short_url:
-          type: "string"
-          example: "https://youtu.be/zlJDTxahav0"
-
+            type: "object"
+            properties:
+              expanded_url:
+                type: "string"
+                example: "https://www.youtube.com/watch?v=zlJDTxahav0"
+              short_url:
+                type: "string"
+                example: "https://youtu.be/zlJDTxahav0"
