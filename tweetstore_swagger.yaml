@@ -125,10 +125,13 @@ components:
             format: "int64"
           example: [1, 2, 3, 4]
         urls:
-          description: "Annar array of objects holding a shortened and an expanded url"
+          description: "An array of objects holding a shortened and an expanded url"
           type: "array"
           items:
             $ref: "#/component/schemas/Urls"
+          example:
+            - expandend_url: "https://www.youtube.com/watch?v=zlJDTxahav0"
+            - short_url: "https://youtu.be/zlJDTxahav0"
     Urls:
       type: "object"
       properties:
