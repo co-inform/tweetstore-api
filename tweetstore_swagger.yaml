@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 servers:
-  - url: https://api.coinform.eu/
+  - url: https://tweetstore.coinform.eu/
     description: The TweetStore server adress 
 info:
   description: |
@@ -23,51 +23,67 @@ paths:
           type: "string"
       responses:
         200:
-          description: "successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Tweet"
-        400:
-          description: "Invalid input"
-  /tweet/{tweet_id}/replies:
-    get:
-      tags:
-      - "Module Twitter support"
-      summary: "Get replie to a tweet"
-      description: "Gets a list of all the replies to a certain tweet_id"
-      responses:
-        200:
-          description: "successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Tweet"
-        400:
-          description: "Invalid input"
-  /user/{user}/tweet:
-    get:
-      tags:
-      - "Module Twitter support"
-      summary: "Get a response from a query"
-      description: "Get the request from a previous query"
-      operationId: "requestQueryId"
-      parameters:
-      - name: "n"
-        in: "path"
-        description: "the number of tweets to request for a certain Twitter user, if n is omitted or equals -1 all the stored tweets will be returned"
-        required: false
-        schema:
-          type: "string"
-      responses:
-        200:
-          description: "successful operation"
+          description: "Will return a single Tweet"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Tweet"
         404:
-          description: "no such query_id"
+          description: "Resoruce not found, it does not exist in our database"
+  /tweet/{tweet_id}/replies:
+    get:
+      tags:
+      - "Module Twitter support"
+      summary: "Get replies to a tweet"
+      description: "Gets a list of all the replies to a certain tweet_id that exists in our database, necesarily not all specified in the replies array of Tweet objects. Missing replies will have to be handled by the module"
+      parameters:
+        - name: "tweet_id"
+          in: "path"
+          requeired: true
+          description: "The tweet_id to query for replies"
+          schems:
+            type: "string"
+      responses:
+        200:
+          description: "Will return an Array of Tweet objects that are replies to the queried tweet_id"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Tweet"
+        404:
+          description: "That resource does not exist in our database"
+  /user/{user}/tweet:
+    get:
+      tags:
+      - "Module Twitter support"
+      summary: "Get user Tweets"
+      description: "Gets all or n tweets connected to a user in the database"
+      parameters:
+      - name: "user"
+        in: "path"
+        description: "the Twitter user to query for tweets"
+        required: true
+        schema:
+          type: "string"
+      - name: "n"
+        in: "path"
+        description: "the number of tweets to request for a certain Twitter user, if n is omitted or equals -1 all the stored tweets will be returned. If n == 0 no tweets will be retrieved"
+        required: false
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "Will return an array of Tweet objects that are linked to the particular user"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Tweet"
+        404:
+          description: "That resource does not exist in our database"
   /tweet:
     post:
       tags: 
@@ -83,9 +99,9 @@ paths:
               $ref: "#/components/schemas/Tweet"
       responses:
         200:
-          description: "successful operation"
+          description: "The tweet was successfully stored in the database"
         404:
-          description: "no such transaction_id"
+          description: "Invalid request or body"
 components:
   schemas:
     Tweet:
@@ -94,11 +110,17 @@ components:
         tweet_id:
           type: "integer" 
           format: "int64"
+          example: 5555555
         user:
           type: "string"
+          example: "realDonaldTrump"
         content:
           type: "string"
+          example: "I will build a great wall"
         replies:
+          description: "An array of integers representing the replies to the particular Tweet"
           type: "array"
-          items: "integer"
-          format: "int64"
+          items:
+            type: "integer"
+            format: "int64"
+          example: [1, 2, 3, 4]
