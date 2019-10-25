@@ -13,7 +13,7 @@ paths:
     get:
       tags: 
       - "Module Twitter support" 
-      summary: "Get a previously retreived Tweet"
+      summary: "Get a Tweet previously retreived from Twitter by a module and stored in the database by that module"
       parameters:
       - name: "tweet_id"
         in: "path"
@@ -29,7 +29,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Tweet"
         404:
-          description: "Resoruce not found, it does not exist in our database"
+          description: "Resource not found, it does not exist in our database"
   /tweet/{tweet_id}/replies:
     get:
       tags:
@@ -125,7 +125,7 @@ components:
             format: "int64"
           example: [1, 2, 3, 4]
         urls:
-          description: "An array of objects holding a shortened and an expanded url"
+          description: "An array of objects where each object holds a shortened and an expanded url cotained in the tweet"
           type: "array"
           items:
             type: "object"
