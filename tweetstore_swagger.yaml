@@ -39,9 +39,9 @@ paths:
       parameters:
         - name: "tweet_id"
           in: "path"
-          requeired: true
+          required: true
           description: "The tweet_id to query for replies"
-          schems:
+          schema:
             type: "string"
       responses:
         200:
@@ -102,6 +102,33 @@ paths:
       responses:
         200:
           description: "The tweet was successfully stored in the database"
+        404:
+          description: "Invalid request or body"
+    put:
+      tags: 
+      - "Module Twitter support"
+      summary: "Update or Store tweet(s) in the TwitterStore"
+      description: "Takes an array of Tweet objects containing tweet_id and the fields to be updated or created"
+      requestBody:
+        description: "An array of Tweet objects"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/Tweet"
+      responses:
+        200:
+          description: "The tweets were successfully updated in the database"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  type: "integer"
+                  format: "int64"
+                  example: 5555555
         404:
           description: "Invalid request or body"
 components:
