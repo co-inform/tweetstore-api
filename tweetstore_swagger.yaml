@@ -89,7 +89,7 @@ paths:
       tags: 
       - "Module Twitter support"
       summary: "Store a tweet(s) in the TwitterStore"
-      description: "Takes an array of Tweet objects to be stored in the database"
+      description: "Takes an array of Tweet objects to be stored in the database, existing tweet objects are overwritten"
       requestBody:
         description: "An array of Tweet objects"
         required: true
@@ -101,7 +101,7 @@ paths:
                 $ref: "#/components/schemas/Tweet"
       responses:
         200:
-          description: "The tweet was successfully stored in the database"
+          description: "The tweets were successfully stored in the database"
         404:
           description: "Invalid request or body"
     put:
