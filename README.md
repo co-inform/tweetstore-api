@@ -1,4 +1,4 @@
-# gateway-api
+# tweetstore-api
 The API for the gateway
 
 https://co-inform.github.io/tweetstore-api
