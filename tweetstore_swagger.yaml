@@ -9,16 +9,16 @@ info:
   version: "0.0.1"
   title: "[Draft] Co-Inform TweetStore API"
 paths:
-  /tweet/{tweet_id}:
+  /tweet/{tweetid}:
     get:
       tags: 
       - "Module Twitter support" 
       summary: "Get a Tweet previously retreived from Twitter by a module and stored in the database by that module"
       parameters:
-      - name: "tweet_id"
+      - name: "tweetid"
         in: "path"
         required: true
-        description: "The tweet_id for the specific Tweet in the database"
+        description: "The tweetid for the specific Tweet in the database"
         schema:
           type: "string"
       responses:
@@ -30,22 +30,22 @@ paths:
                 $ref: "#/components/schemas/Tweet"
         404:
           description: "Resource not found, it does not exist in our database"
-  /tweet/{tweet_id}/replies:
+  /tweet/{tweetid}/replies:
     get:
       tags:
       - "Module Twitter support"
       summary: "Get replies to a tweet"
-      description: "Gets a list of all the replies to a certain tweet_id that exists in our database, necesarily not all specified in the replies array of Tweet objects. Missing replies will have to be handled by the module"
+      description: "Gets a list of all the replies to a certain tweetid that exists in our database, necesarily not all specified in the replies array of Tweet objects. Missing replies will have to be handled by the module"
       parameters:
-        - name: "tweet_id"
+        - name: "tweetid"
           in: "path"
           required: true
-          description: "The tweet_id to query for replies"
+          description: "The tweetid to query for replies"
           schema:
             type: "string"
       responses:
         200:
-          description: "Will return an Array of Tweet objects that are replies to the queried tweet_id"
+          description: "Will return an Array of Tweet objects that are replies to the queried tweetid"
           content:
             application/json:
               schema:
@@ -108,7 +108,7 @@ paths:
       tags: 
       - "Module Twitter support"
       summary: "Update or Store tweet(s) in the TwitterStore"
-      description: "Takes an array of Tweet objects containing tweet_id and the fields to be updated or created"
+      description: "Takes an array of Tweet objects containing tweetid and the fields to be updated or created"
       requestBody:
         description: "An array of Tweet objects"
         required: true
