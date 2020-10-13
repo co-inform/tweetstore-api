@@ -136,7 +136,7 @@ components:
     Tweet:
       type: "object"
       properties:
-        tweet_id:
+        tweetid:
           type: "integer" 
           format: "int64"
           example: 5555555
